@@ -1,6 +1,6 @@
 # MyChallenge
 
-This is a project where I want to implement following technologies/libraries:
+This is a project where I plan to implement following technologies/libraries:
 
 - Coroutines
 - JetpackCompose
@@ -9,3 +9,4 @@ This is a project where I want to implement following technologies/libraries:
 - DaggerHilt
 - Room
 - Animations
+- Widget
