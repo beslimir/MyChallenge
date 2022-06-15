@@ -1,26 +1,53 @@
 package com.example.mychallenge.presentation.new_challenge.duration
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.Button
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.presentation.LocalSpacing
+import com.example.mychallenge.presentation.new_challenge.destinations.InfoScreenDestination
+import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+data class DurationScreenNavArgs(
+    val nameID: String
+)
+
 @Composable
-@Destination
+@Destination(navArgsDelegate = DurationScreenNavArgs::class)
 fun DurationScreen(
-    nameID: String,
+    navArgs: DurationScreenNavArgs,
     navigator: DestinationsNavigator,
     scaffoldState: ScaffoldState,
-    viewModel: DurationViewModel = hiltViewModel(),
+    viewModel: DurationViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
+
+    LaunchedEffect(key1 = true) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Success -> navigator.navigate(
+                    InfoScreenDestination(
+                        nameID = navArgs.nameID
+                    )
+                )
+                is UiEvent.ShowSnackBar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
+                }
+            }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -63,6 +90,17 @@ fun DurationScreen(
                 )
             }
         }
+        Button(
+            onClick = viewModel::onNextClick,
+            modifier = Modifier
+                .align(Alignment.BottomEnd),
+            enabled = true,
+            shape = RoundedCornerShape(80.dp)
+        ) {
+            Text(
+                text = "Next",
+                modifier = Modifier.padding(spacing.spaceSmall)
+            )
+        }
     }
-
 }

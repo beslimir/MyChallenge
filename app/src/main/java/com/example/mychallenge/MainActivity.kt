@@ -11,6 +11,7 @@ import com.example.mychallenge.presentation.new_challenge.NavGraphs
 import com.example.mychallenge.presentation.new_challenge.destinations.DurationScreenDestination
 import com.example.mychallenge.presentation.new_challenge.destinations.NameScreenDestination
 import com.example.mychallenge.presentation.new_challenge.duration.DurationScreen
+import com.example.mychallenge.presentation.new_challenge.duration.DurationScreenNavArgs
 import com.example.mychallenge.presentation.new_challenge.name.NameScreen
 import com.example.mychallenge.ui.theme.MyChallengeTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(DurationScreenDestination) {
                             DurationScreen(
-                                nameID = "",
+                                navArgs = DurationScreenNavArgs(""),
                                 navigator = destinationsNavigator,
                                 scaffoldState = scaffoldState
                             )
