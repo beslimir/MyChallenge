@@ -6,6 +6,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -13,12 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.presentation.LocalSpacing
+import com.example.mychallenge.presentation.new_challenge.destinations.DurationScreenDestination
 import com.example.mychallenge.util.UiEvent
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
+@Destination
+@RootNavGraph(start = true)
 fun NameScreen(
+    navigator: DestinationsNavigator,
     scaffoldState: ScaffoldState,
-    onNextClick: () -> Unit,
     viewModel: NameViewModel = hiltViewModel(),
 ) {
     val spacing = LocalSpacing.current
@@ -26,7 +33,11 @@ fun NameScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Success -> onNextClick()
+                is UiEvent.Success -> navigator.navigate(
+                    DurationScreenDestination(
+                        nameID = viewModel.name
+                    )
+                )
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message
