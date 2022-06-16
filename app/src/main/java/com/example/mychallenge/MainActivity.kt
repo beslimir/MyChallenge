@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
-import com.example.mychallenge.presentation.new_challenge.NavGraphs
-import com.example.mychallenge.presentation.new_challenge.destinations.DurationScreenDestination
-import com.example.mychallenge.presentation.new_challenge.destinations.NameScreenDestination
+import com.example.mychallenge.presentation.NavGraphs
+import com.example.mychallenge.presentation.destinations.DurationScreenDestination
+import com.example.mychallenge.presentation.destinations.NameScreenDestination
 import com.example.mychallenge.presentation.new_challenge.duration.DurationScreen
 import com.example.mychallenge.presentation.new_challenge.duration.DurationScreenNavArgs
 import com.example.mychallenge.presentation.new_challenge.name.NameScreen
