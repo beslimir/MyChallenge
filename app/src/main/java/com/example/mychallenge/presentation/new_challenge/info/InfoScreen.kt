@@ -1,10 +1,11 @@
 package com.example.mychallenge.presentation.new_challenge.info
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -12,16 +13,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.HomeScreenDestination
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+data class InfoScreenNavArgs(
+    val challengeName: String,
+    val challengeDuration: Int,
+)
+
 @Composable
-@Destination
+@Destination(navArgsDelegate = InfoScreenNavArgs::class)
 fun InfoScreen(
-    nameID: String,
+    navArgs: InfoScreenNavArgs,
     navigator: DestinationsNavigator,
     viewModel: InfoViewModel = hiltViewModel(),
 ) {
@@ -31,6 +38,13 @@ fun InfoScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Success -> {
+                    viewModel.saveChallengeToDb(
+                        Challenge(
+                            name = navArgs.challengeName,
+                            duration = navArgs.challengeDuration,
+                            info = viewModel.info
+                        )
+                    )
                     navigator.navigate(
                         HomeScreenDestination()
                     ) {

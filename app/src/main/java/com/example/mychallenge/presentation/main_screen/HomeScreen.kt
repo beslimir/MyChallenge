@@ -57,7 +57,7 @@ fun HomeScreen(
                 Challenge(
                     name = item.name,
                     duration = item.duration,
-                    note = item.note
+                    info = item.info
                 )
             }
         }

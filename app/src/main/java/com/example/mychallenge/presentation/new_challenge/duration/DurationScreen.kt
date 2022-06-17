@@ -19,7 +19,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 data class DurationScreenNavArgs(
-    val nameID: String
+    val challengeName: String
 )
 
 @Composable
@@ -37,7 +37,8 @@ fun DurationScreen(
             when (event) {
                 is UiEvent.Success -> navigator.navigate(
                     InfoScreenDestination(
-                        nameID = navArgs.nameID
+                        challengeName = navArgs.challengeName,
+                        challengeDuration = viewModel.duration.toInt()
                     )
                 )
                 is UiEvent.ShowSnackBar -> {

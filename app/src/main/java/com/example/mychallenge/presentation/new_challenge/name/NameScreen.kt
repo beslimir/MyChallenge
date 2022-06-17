@@ -32,7 +32,7 @@ fun NameScreen(
             when (event) {
                 is UiEvent.Success -> navigator.navigate(
                     DurationScreenDestination(
-                        nameID = viewModel.name
+                        challengeName = viewModel.name
                     )
                 )
                 is UiEvent.ShowSnackBar -> {

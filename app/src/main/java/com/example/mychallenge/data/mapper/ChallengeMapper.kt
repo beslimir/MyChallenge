@@ -7,7 +7,7 @@ fun ChallengeEntity.toChallenge(): Challenge {
     return Challenge(
         name = name,
         duration = duration,
-        note = note
+        info = info
     )
 }
 
@@ -15,6 +15,6 @@ fun Challenge.toChallengeEntity(): ChallengeEntity {
     return ChallengeEntity(
         name = name,
         duration = duration,
-        note = note
+        info = info
     )
 }

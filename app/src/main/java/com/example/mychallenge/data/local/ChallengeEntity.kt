@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class ChallengeEntity(
     val name: String,
     val duration: Int,
-    val note: String? = null,
+    val info: String? = null,
     @PrimaryKey val id: Int? = null
 )
