@@ -23,7 +23,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun NameScreen(
     navigator: DestinationsNavigator,
     scaffoldState: ScaffoldState,
-    viewModel: NameViewModel = hiltViewModel(),
+    viewModel: NameViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
 

@@ -20,15 +20,11 @@ import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-data class InfoScreenNavArgs(
-    val challengeName: String,
-    val challengeDuration: Int,
-)
-
 @Composable
-@Destination(navArgsDelegate = InfoScreenNavArgs::class)
+@Destination
 fun InfoScreen(
-    navArgs: InfoScreenNavArgs,
+    challengeName: String,
+    challengeDuration: Int,
     navigator: DestinationsNavigator,
     viewModel: InfoViewModel = hiltViewModel(),
 ) {
@@ -40,8 +36,8 @@ fun InfoScreen(
                 is UiEvent.Success -> {
                     viewModel.saveChallengeToDb(
                         Challenge(
-                            name = navArgs.challengeName,
-                            duration = navArgs.challengeDuration,
+                            name = challengeName,
+                            duration = challengeDuration,
                             info = viewModel.info
                         )
                     )
