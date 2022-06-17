@@ -1,14 +1,15 @@
 package com.example.mychallenge.presentation.new_challenge.info
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.presentation.LocalSpacing
@@ -30,6 +31,15 @@ fun InfoScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Success -> {
+                    navigator.navigate(
+                        HomeScreenDestination()
+                    ) {
+                        popUpTo(route = HomeScreenDestination.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+                is UiEvent.Failure -> {
                     navigator.navigate(
                         HomeScreenDestination()
                     ) {
@@ -64,17 +74,37 @@ fun InfoScreen(
                     .width(IntrinsicSize.Min)
             )
         }
-        Button(
-            onClick = viewModel::onNextClick,
+        Row(
             modifier = Modifier
+                .fillMaxWidth()
                 .align(Alignment.BottomEnd),
-            enabled = true,
-            shape = RoundedCornerShape(80.dp)
+            horizontalArrangement = Arrangement.End
         ) {
-            Text(
-                text = "Finish",
-                modifier = Modifier.padding(spacing.spaceSmall)
-            )
+            Button(
+                onClick = viewModel::onDismissClick,
+                enabled = true,
+                shape = RoundedCornerShape(80.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Red,
+                    contentColor = Color.White
+                ),
+            ) {
+                Text(
+                    text = "Dismiss",
+                    modifier = Modifier.padding(spacing.spaceSmall)
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Button(
+                onClick = viewModel::onNextClick,
+                enabled = true,
+                shape = RoundedCornerShape(80.dp)
+            ) {
+                Text(
+                    text = "Finish",
+                    modifier = Modifier.padding(spacing.spaceSmall)
+                )
+            }
         }
     }
 }

@@ -25,9 +25,16 @@ class InfoViewModel @Inject constructor(): ViewModel() {
         this.info = info
     }
 
+    //TODO: Implement saving to DB: Check if we need Failure (InfoScreen)
     fun onNextClick() {
         viewModelScope.launch {
             _uiEvent.send(UiEvent.Success)
+        }
+    }
+
+    fun onDismissClick() {
+        viewModelScope.launch {
+            _uiEvent.send(UiEvent.Failure)
         }
     }
 }
