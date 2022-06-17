@@ -16,12 +16,10 @@ import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.DurationScreenDestination
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 @Destination
-@RootNavGraph(start = true)
 fun NameScreen(
     navigator: DestinationsNavigator,
     scaffoldState: ScaffoldState,

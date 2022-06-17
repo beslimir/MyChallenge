@@ -13,12 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
-import com.example.mychallenge.presentation.new_challenge.name.NameScreen
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 @Destination
+@RootNavGraph(start = true)
 fun HomeScreen(
     navigator: DestinationsNavigator,
     viewModel: HomeViewModel = hiltViewModel()

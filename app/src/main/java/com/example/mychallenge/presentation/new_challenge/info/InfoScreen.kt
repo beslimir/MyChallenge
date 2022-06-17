@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,7 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun InfoScreen(
     nameID: String,
     navigator: DestinationsNavigator,
-    viewModel: InfoViewModel = hiltViewModel()
+    viewModel: InfoViewModel = hiltViewModel(),
 ) {
     val spacing = LocalSpacing.current
 
@@ -33,7 +32,11 @@ fun InfoScreen(
                 is UiEvent.Success -> {
                     navigator.navigate(
                         HomeScreenDestination()
-                    )
+                    ) {
+                        popUpTo(route = HomeScreenDestination.route) {
+                            inclusive = true
+                        }
+                    }
                 }
                 else -> Unit
             }
