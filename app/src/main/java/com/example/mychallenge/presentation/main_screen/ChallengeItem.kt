@@ -13,11 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mychallenge.domain.model.Challenge
 
 //@Preview
 @Composable
 fun ChallengeItem(
-
+    challenge: Challenge
 ) {
     Column(
         modifier = Modifier
@@ -35,7 +36,7 @@ fun ChallengeItem(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = "My Challenge 01",
+                text = challenge.name,
                 color = Color.White,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
@@ -58,7 +59,7 @@ fun ChallengeItem(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = "My info...",
+                text = challenge.info ?: "No information provided...",
                 color = Color.White,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
@@ -72,7 +73,7 @@ fun ChallengeItem(
                     .weight(1f)
             )
             Text(
-                text = "Duration: 7 days",
+                text = "${challenge.duration}",
                 color = Color.White,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,

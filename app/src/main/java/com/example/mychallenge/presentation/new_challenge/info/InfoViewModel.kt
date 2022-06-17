@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.domain.use_cases.InsertNewChallengeUseCase
+import com.example.mychallenge.domain.use_cases.UseCasesWrapper
 import com.example.mychallenge.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InfoViewModel @Inject constructor(
-    private val insertNewChallenge: InsertNewChallengeUseCase
+    private val useCases: UseCasesWrapper
 ): ViewModel() {
 
     var info by mutableStateOf("")
@@ -40,11 +41,17 @@ class InfoViewModel @Inject constructor(
         }
     }
 
+    fun onDismissClick() {
+        viewModelScope.launch {
+            _uiEvent.send(UiEvent.Failure)
+        }
+    }
+
     //TODO: Do proper handling
     fun saveChallengeToDb(challenge: Challenge) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                insertNewChallenge(
+                useCases.insertNewChallengeUseCase(
                     Challenge(
                         name = challenge.name,
                         duration = challenge.duration,
@@ -59,12 +66,6 @@ class InfoViewModel @Inject constructor(
                 e.printStackTrace()
                 Log.d("aaaa", "saveChallengeToDb: Exception")
             }
-        }
-    }
-
-    fun onDismissClick() {
-        viewModelScope.launch {
-            _uiEvent.send(UiEvent.Failure)
         }
     }
 }

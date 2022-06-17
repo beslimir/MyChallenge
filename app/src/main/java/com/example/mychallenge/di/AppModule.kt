@@ -5,7 +5,9 @@ import androidx.room.Room
 import com.example.mychallenge.data.local.ChallengeDatabase
 import com.example.mychallenge.data.repository.ChallengeRepositoryImpl
 import com.example.mychallenge.domain.repository.ChallengeRepository
+import com.example.mychallenge.domain.use_cases.GetChallengesUseCase
 import com.example.mychallenge.domain.use_cases.InsertNewChallengeUseCase
+import com.example.mychallenge.domain.use_cases.UseCasesWrapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,8 +32,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideUseCase(repository: ChallengeRepository): InsertNewChallengeUseCase {
-        return InsertNewChallengeUseCase(repository)
+    fun provideUseCasesWrapper(repository: ChallengeRepository): UseCasesWrapper {
+        return UseCasesWrapper(
+            getChallengesUseCase = GetChallengesUseCase(repository),
+            insertNewChallengeUseCase = InsertNewChallengeUseCase(repository)
+        )
     }
 
 }

@@ -6,9 +6,7 @@ import com.example.mychallenge.domain.repository.ChallengeRepository
 class InsertNewChallengeUseCase(
     private val repository: ChallengeRepository
 ) {
-    suspend operator fun invoke(
-        challenge: Challenge
-    ) {
+    suspend operator fun invoke(challenge: Challenge) {
         repository.insertNewChallenge(
             Challenge(
                 name = challenge.name,

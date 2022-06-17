@@ -54,11 +54,7 @@ fun HomeScreen(
 
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.challenges) { item ->
-                Challenge(
-                    name = item.name,
-                    duration = item.duration,
-                    info = item.info
-                )
+                ChallengeItem(challenge = item)
             }
         }
     }
