@@ -13,13 +13,20 @@ import javax.inject.Inject
 
 class DurationViewModel @Inject constructor(): ViewModel() {
 
-    var duration by mutableStateOf("1")
+    //length of the string which represents max number of days days
+    companion object {
+        private const val MAX_LEN = 3
+    }
+
+    var duration by mutableStateOf("")
         private set
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onDurationEnter(duration: String) {
-        this.duration = duration.filter { it.isDigit() }
+        this.duration = duration.filter {
+            it.isDigit()
+        }.take(MAX_LEN)
     }
 
     fun onNextClick() {

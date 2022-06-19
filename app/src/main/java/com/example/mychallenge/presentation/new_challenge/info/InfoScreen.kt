@@ -2,7 +2,6 @@ package com.example.mychallenge.presentation.new_challenge.info
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ScaffoldState
@@ -13,10 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.HomeScreenDestination
+import com.example.mychallenge.presentation.new_challenge.components.ChallengeInputField
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -83,14 +84,13 @@ fun InfoScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Do you have something to say before you're knocked out?"
+                text = "Do you have something to say before you're knocked out?",
+                fontSize = 30.sp
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            BasicTextField(
+            ChallengeInputField(
                 value = viewModel.info,
-                onValueChange = viewModel::onInfoEnter,
-                modifier = Modifier
-                    .width(IntrinsicSize.Min)
+                onValueChange = viewModel::onInfoEnter
             )
         }
         Row(

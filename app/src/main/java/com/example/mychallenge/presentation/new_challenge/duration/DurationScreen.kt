@@ -2,8 +2,8 @@ package com.example.mychallenge.presentation.new_challenge.duration
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -11,9 +11,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.InfoScreenDestination
+import com.example.mychallenge.presentation.new_challenge.components.ChallengeInputField
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -42,6 +44,7 @@ fun DurationScreen(
                         message = event.message
                     )
                 }
+                else -> Unit
             }
         }
     }
@@ -57,7 +60,8 @@ fun DurationScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "For how long can you do it?"
+                text = "For how long can you do it?",
+                fontSize = 30.sp
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             Row(
@@ -71,9 +75,10 @@ fun DurationScreen(
                         .weight(1f),
                     contentAlignment = Alignment.CenterEnd
                 ) {
-                    BasicTextField(
+                    ChallengeInputField(
                         value = viewModel.duration,
                         onValueChange = viewModel::onDurationEnter,
+                        hintText = "7",
                         modifier = Modifier
                             .width(IntrinsicSize.Min)
                     )
@@ -81,6 +86,8 @@ fun DurationScreen(
                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                 Text(
                     text = "days",
+                    color = MaterialTheme.colors.primaryVariant,
+                    fontSize = 20.sp,
                     modifier = Modifier
                         .width(IntrinsicSize.Min)
                         .weight(1f)
