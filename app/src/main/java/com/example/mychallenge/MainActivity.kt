@@ -49,7 +49,8 @@ class MainActivity : ComponentActivity() {
                             InfoScreen(
                                 challengeName = navArgs.challengeName,
                                 challengeDuration = navArgs.challengeDuration,
-                                navigator = destinationsNavigator
+                                navigator = destinationsNavigator,
+                                scaffoldState = scaffoldState
                             )
                         }
                     }

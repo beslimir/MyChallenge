@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +27,7 @@ fun InfoScreen(
     challengeName: String,
     challengeDuration: Int,
     navigator: DestinationsNavigator,
+    scaffoldState: ScaffoldState,
     viewModel: InfoViewModel = hiltViewModel(),
 ) {
     val spacing = LocalSpacing.current
@@ -41,6 +43,13 @@ fun InfoScreen(
                             info = viewModel.info
                         )
                     )
+                }
+                is UiEvent.Failure -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.message
+                    )
+                }
+                is UiEvent.SaveChallenge -> {
                     navigator.navigate(
                         HomeScreenDestination()
                     ) {
@@ -49,7 +58,7 @@ fun InfoScreen(
                         }
                     }
                 }
-                is UiEvent.Failure -> {
+                is UiEvent.DismissChallenge -> {
                     navigator.navigate(
                         HomeScreenDestination()
                     ) {
@@ -106,7 +115,7 @@ fun InfoScreen(
             }
             Spacer(modifier = Modifier.width(8.dp))
             Button(
-                onClick = viewModel::onNextClick,
+                onClick = viewModel::onFinishClick,
                 enabled = true,
                 shape = RoundedCornerShape(80.dp)
             ) {
