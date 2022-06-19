@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NameViewModel @Inject constructor(): ViewModel() {
 
-    var name by mutableStateOf("NoName")
+    var name by mutableStateOf("")
         private set
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()

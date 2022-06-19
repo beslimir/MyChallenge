@@ -4,13 +4,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.DurationScreenDestination
@@ -55,14 +59,33 @@ fun NameScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "What will you challenge?"
+                text = "What will you challenge?",
+                fontSize = 30.sp
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             BasicTextField(
                 value = viewModel.name,
                 onValueChange = viewModel::onNameEnter,
-                modifier = Modifier
-                    .width(IntrinsicSize.Min)
+                modifier = Modifier.fillMaxWidth(),
+                textStyle = TextStyle(
+                    color = MaterialTheme.colors.primaryVariant,
+                    fontSize = 20.sp
+                ),
+                decorationBox = { hint ->
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        if (viewModel.name.isEmpty()) {
+                            Text(
+                                text = "Type here...",
+                                style = TextStyle(
+                                    color = Color.LightGray,
+                                    fontSize = 20.sp
+                                ),
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                        hint()
+                    }
+                }
             )
         }
         Button(
