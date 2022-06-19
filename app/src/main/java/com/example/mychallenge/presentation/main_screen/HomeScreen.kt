@@ -21,7 +21,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @RootNavGraph(start = true)
 fun HomeScreen(
     navigator: DestinationsNavigator,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state
 
@@ -41,19 +41,22 @@ fun HomeScreen(
             }
         }
     ) {
-        if (!state.isListVisible) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "No entries yet. Make now a challenge!")
-            }
 
-        }
-
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.challenges) { item ->
-                ChallengeItem(challenge = item)
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            if (state.isLoading) {
+                CircularProgressIndicator()
+            } else {
+                if (!state.isListVisible) {
+                    Text(text = "No entries yet. Make now a challenge!")
+                }
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(state.challenges) { item ->
+                        ChallengeItem(challenge = item)
+                    }
+                }
             }
         }
     }

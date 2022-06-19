@@ -30,6 +30,7 @@ class HomeViewModel @Inject constructor(
     private var getChallengesJob: Job? = null
 
     init {
+        state = state.copy(isLoading = true)
         getChallenges()
     }
 
@@ -38,7 +39,8 @@ class HomeViewModel @Inject constructor(
         getChallengesJob = useCases.getChallengesUseCase().onEach { challenges ->
             state = state.copy(
                 isListVisible = challenges.isNotEmpty(),
-                challenges = challenges
+                challenges = challenges,
+                isLoading = false
             )
         }.launchIn(viewModelScope)
     }
