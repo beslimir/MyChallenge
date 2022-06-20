@@ -72,8 +72,8 @@ fun ChallengeItem(
                                 sizeImage = it.size
                             }
                             .align(Center)
-                            .fillMaxSize()
-                            .alpha(0.8f),
+//                            .alpha(0.8f)
+                            .fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
                     if (painterState is ImagePainter.State.Loading) {
@@ -82,26 +82,27 @@ fun ChallengeItem(
                             modifier = Modifier
                                 .align(Center)
                         )
+                    } else if (painterState is ImagePainter.State.Success) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(gradient)
+                        )
+                        Text(
+                            text = challenge.name,
+                            color = Color.White,
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.SansSerif,
+                                fontSize = 20.sp
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier
+                                .padding(top = 10.dp, start = 10.dp)
+                                .align(TopStart)
+                        )
                     }
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(gradient)
-                    )
-                    Text(
-                        text = challenge.name,
-                        color = Color.White,
-                        style = TextStyle(
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.SansSerif,
-                            fontSize = 20.sp
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .padding(top = 10.dp, start = 10.dp)
-                            .align(TopStart)
-                    )
                 }
             }
         }
