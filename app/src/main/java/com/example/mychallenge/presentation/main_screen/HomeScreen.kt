@@ -45,7 +45,8 @@ fun HomeScreen(
                     contentDescription = "Add a new challenge"
                 )
             }
-        }
+        },
+        scaffoldState = scaffoldState
     ) {
 
         Box(
