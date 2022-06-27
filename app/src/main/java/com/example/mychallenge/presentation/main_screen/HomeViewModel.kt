@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.domain.use_cases.InsertNewChallengeUseCase
 import com.example.mychallenge.domain.use_cases.UseCasesWrapper
 import com.example.mychallenge.util.UiEvent
@@ -14,6 +15,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +31,8 @@ class HomeViewModel @Inject constructor(
 
     private var getChallengesJob: Job? = null
 
+    private var recentlyDeletedChallenge: Challenge? = null
+
     init {
         state = state.copy(isLoading = true)
         getChallenges()
@@ -43,6 +47,20 @@ class HomeViewModel @Inject constructor(
                 isLoading = false
             )
         }.launchIn(viewModelScope)
+    }
+
+    fun removeChallenge(challenge: Challenge) {
+        viewModelScope.launch {
+            useCases.removeChallengeUseCase(challenge)
+            recentlyDeletedChallenge = challenge
+        }
+    }
+
+    fun restoreChallenge() {
+        viewModelScope.launch {
+            useCases.insertNewChallengeUseCase(recentlyDeletedChallenge ?: return@launch)
+            recentlyDeletedChallenge = null
+        }
     }
 
 

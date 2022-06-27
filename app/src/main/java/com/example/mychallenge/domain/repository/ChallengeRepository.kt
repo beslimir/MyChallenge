@@ -7,5 +7,6 @@ interface ChallengeRepository {
 
     fun getChallenges(): Flow<List<Challenge>>
     suspend fun insertNewChallenge(challenge: Challenge)
+    suspend fun removeChallenge(challenge: Challenge)
 
 }

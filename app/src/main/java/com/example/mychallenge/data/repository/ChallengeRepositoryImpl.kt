@@ -19,4 +19,7 @@ class ChallengeRepositoryImpl(
         dao.insertNewChallenge(challenge.toChallengeEntity())
     }
 
+    override suspend fun removeChallenge(challenge: Challenge) {
+        dao.removeChallenge(challenge.toChallengeEntity())
+    }
 }

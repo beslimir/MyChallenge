@@ -3,15 +3,15 @@ package com.example.mychallenge.presentation.main_screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -33,6 +33,7 @@ import com.example.mychallenge.domain.model.Challenge
 @Composable
 fun ChallengeItem(
     challenge: Challenge,
+    onRemoveClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -47,12 +48,7 @@ fun ChallengeItem(
                 .padding(10.dp)
                 .background(Color.LightGray)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.Start
-            ) {
+            Column(modifier = Modifier.fillMaxWidth()) {
                 val painter = rememberImagePainter(
                     data = "https://i.ytimg.com/vi/aZihG8ysDss/maxresdefault.jpg"
                 )
@@ -102,6 +98,16 @@ fun ChallengeItem(
                                 .padding(top = 10.dp, start = 10.dp)
                                 .align(TopStart)
                         )
+                        IconButton(
+                            onClick = onRemoveClick,
+                            modifier = Modifier.align(BottomEnd)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Delete,
+                                contentDescription = "remove challenge",
+                                tint = Color.White
+                            )
+                        }
                     }
                 }
             }

@@ -1,9 +1,6 @@
 package com.example.mychallenge.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.mychallenge.domain.model.Challenge
 import kotlinx.coroutines.flow.Flow
 
@@ -14,8 +11,9 @@ interface ChallengeDAO {
     fun getChallenges(): Flow<List<Challenge>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNewChallenge(
-        challenge: ChallengeEntity
-    )
+    suspend fun insertNewChallenge(challenge: ChallengeEntity)
+
+    @Delete
+    suspend fun removeChallenge(challenge: ChallengeEntity)
 
 }

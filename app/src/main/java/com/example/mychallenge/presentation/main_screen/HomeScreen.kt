@@ -8,14 +8,18 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.annotation.ExperimentalCoilApi
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 
+@ExperimentalCoilApi
 @Composable
 @Destination
 @RootNavGraph(start = true)
@@ -24,6 +28,8 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state
+    val scope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     Scaffold(
         floatingActionButton = {
@@ -54,7 +60,21 @@ fun HomeScreen(
                 }
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(state.challenges) { item ->
-                        ChallengeItem(challenge = item)
+                        ChallengeItem(
+                            challenge = item,
+                            onRemoveClick = {
+                                viewModel.removeChallenge(item)
+                                scope.launch {
+                                    val result = scaffoldState.snackbarHostState.showSnackbar(
+                                        message = "Challenge deleted",
+                                        actionLabel = "Undo"
+                                    )
+                                    if (result == SnackbarResult.ActionPerformed) {
+                                        viewModel.restoreChallenge()
+                                    }
+                                }
+                            }
+                        )
                     }
                 }
             }
