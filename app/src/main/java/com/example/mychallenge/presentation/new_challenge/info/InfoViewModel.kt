@@ -1,5 +1,6 @@
 package com.example.mychallenge.presentation.new_challenge.info
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -43,6 +44,7 @@ class InfoViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("NewApi")
     fun saveChallengeToDb(challenge: Challenge) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -50,7 +52,8 @@ class InfoViewModel @Inject constructor(
                     Challenge(
                         name = challenge.name,
                         duration = challenge.duration,
-                        info = challenge.info
+                        info = challenge.info,
+                        date = challenge.date
                     )
                 )
                 _uiEvent.send(UiEvent.SaveChallenge)

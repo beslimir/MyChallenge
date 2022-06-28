@@ -1,5 +1,6 @@
 package com.example.mychallenge.presentation.main_screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,14 +28,24 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.mychallenge.domain.model.Challenge
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 //@Preview
+@SuppressLint("NewApi")
 @ExperimentalCoilApi
 @Composable
 fun ChallengeItem(
     challenge: Challenge,
     onRemoveClick: () -> Unit,
 ) {
+    val endDate = challenge.date.plusDays(challenge.duration.toLong())
+    val daysLeft = if (endDate > LocalDate.now()) {
+        ChronoUnit.DAYS.between(LocalDate.now(), endDate)
+    } else {
+        0
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -135,20 +146,35 @@ fun ChallengeItem(
                     .padding(top = 10.dp, start = 10.dp)
                     .weight(1f)
             )
-            Text(
-                text = "${challenge.duration}",
-                color = Color.White,
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif,
-                    fontSize = 12.sp
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+            Row(
                 modifier = Modifier
-                    .padding(top = 10.dp, start = 10.dp)
-                    .weight(1f)
-            )
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Challenge for ${challenge.duration} days.",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 12.sp
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = "Fighting $daysLeft more days.",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 12.sp
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

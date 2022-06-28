@@ -1,5 +1,6 @@
 package com.example.mychallenge.presentation.new_challenge.info
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.annotation.ExperimentalCoilApi
 import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.HomeScreenDestination
@@ -21,7 +23,10 @@ import com.example.mychallenge.presentation.new_challenge.components.ChallengeIn
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import java.time.LocalDate
 
+@SuppressLint("NewApi")
+@ExperimentalCoilApi
 @Composable
 @Destination
 fun InfoScreen(
@@ -41,7 +46,8 @@ fun InfoScreen(
                         Challenge(
                             name = challengeName,
                             duration = challengeDuration,
-                            info = viewModel.info
+                            info = viewModel.info,
+                            date = LocalDate.now()
                         )
                     )
                 }

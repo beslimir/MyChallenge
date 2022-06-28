@@ -8,5 +8,8 @@ data class ChallengeEntity(
     val name: String,
     val duration: Int,
     val info: String? = null,
+    val dayOfMonth: Int,
+    val month: Int,
+    val year: Int,
     @PrimaryKey val id: Int? = null
 )

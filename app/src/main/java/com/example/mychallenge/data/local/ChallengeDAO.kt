@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface ChallengeDAO {
 
     @Query("SELECT * FROM ChallengeEntity")
-    fun getChallenges(): Flow<List<Challenge>>
+    fun getChallenges(): Flow<List<ChallengeEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewChallenge(challenge: ChallengeEntity)
