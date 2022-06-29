@@ -59,7 +59,7 @@ fun ChallengeItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(imageHeight)
-                .padding(10.dp)
+                .padding(top = 10.dp, start = 10.dp, end = 10.dp, bottom = 5.dp)
                 .clip(RoundedCornerShape(topStart = 20f, topEnd = 20f))
                 .border(
                     width = 1.dp,
@@ -206,6 +206,6 @@ fun ChallengeItem(
                 }
             }
         }
-
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
