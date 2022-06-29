@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -49,30 +48,23 @@ fun ChallengeItem(
     } else {
         0
     }
-    val imageSize = 200.dp
-    val isInfoVisible = challenge.info.isNotEmpty()
-    val columnHeight = if (isInfoVisible) {
-        100.dp
-    } else {
-        55.dp
-    }
+    val imageHeight = 200.dp
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(imageSize + columnHeight)
             .background(Color.Gray)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(imageSize)
+                .height(imageHeight)
                 .padding(10.dp)
-                .clip(RoundedCornerShape(20f))
+                .clip(RoundedCornerShape(topStart = 20f, topEnd = 20f))
                 .border(
                     width = 1.dp,
                     color = Color.Transparent,
-                    shape = RoundedCornerShape(20f)
+                    shape = RoundedCornerShape(topStart = 20f, topEnd = 20f)
                 )
         ) {
             Column(
@@ -146,11 +138,11 @@ fun ChallengeItem(
         Box(
             modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp) //put .padding() before .clip()
-                .clip(RoundedCornerShape(20f))
+                .clip(RoundedCornerShape(bottomStart = 20f, bottomEnd = 20f))
                 .border(
                     width = 1.dp,
                     color = Color.Transparent,
-                    shape = RoundedCornerShape(20f)
+                    shape = RoundedCornerShape(bottomStart = 20f, bottomEnd = 20f)
                 )
         ) {
             Column(
@@ -160,7 +152,7 @@ fun ChallengeItem(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
-                if (isInfoVisible) {
+                if (challenge.info.isNotEmpty()) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
