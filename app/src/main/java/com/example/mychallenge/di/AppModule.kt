@@ -25,11 +25,13 @@ object AppModule {
         app,
         ChallengeDatabase::class.java,
         "challenge_database"
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
     @Singleton
     @Provides
-    fun provideRepository(db: ChallengeDatabase): ChallengeRepository = ChallengeRepositoryImpl(db.dao)
+    fun provideRepository(db: ChallengeDatabase): ChallengeRepository =
+        ChallengeRepositoryImpl(db.dao)
 
     @Singleton
     @Provides

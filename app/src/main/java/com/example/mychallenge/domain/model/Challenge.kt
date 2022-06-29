@@ -5,7 +5,7 @@ import java.time.LocalDate
 data class Challenge(
     val name: String,
     val duration: Int,
-    val info: String?,
+    val info: String,
     val date: LocalDate,
     val id: Int? = null
 )

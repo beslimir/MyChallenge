@@ -45,17 +45,24 @@ fun ChallengeItem(
     } else {
         0
     }
+    val imageSize = 200.dp
+    val isInfoVisible = challenge.info.isNotEmpty()
+    val columnHeight = if (isInfoVisible) {
+        100.dp
+    } else {
+        55.dp
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(imageSize + columnHeight)
             .background(Color.Gray)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(imageSize)
                 .padding(10.dp)
                 .background(Color.LightGray)
         ) {
@@ -123,29 +130,32 @@ fun ChallengeItem(
                 }
             }
         }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(columnHeight)
                 .padding(10.dp)
                 .background(Color.DarkGray),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(
-                text = challenge.info ?: "No information provided...",
-                color = Color.White,
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif,
-                    fontSize = 12.sp
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .padding(top = 10.dp, start = 10.dp)
-                    .weight(1f)
-            )
+            if (isInfoVisible) {
+                Text(
+                    text = challenge.info,
+                    color = Color.White,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                        fontSize = 12.sp
+                    ),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(top = 10.dp, start = 10.dp, end = 10.dp)
+                        .weight(1f)
+                )
+            }
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
