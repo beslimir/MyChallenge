@@ -3,7 +3,10 @@ package com.example.mychallenge.presentation.main_screen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -13,6 +16,7 @@ import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -64,9 +68,17 @@ fun ChallengeItem(
                 .fillMaxWidth()
                 .height(imageSize)
                 .padding(10.dp)
-                .background(Color.LightGray)
+                .clip(RoundedCornerShape(20f))
+                .border(
+                    width = 1.dp,
+                    color = Color.Transparent,
+                    shape = RoundedCornerShape(20f)
+                )
         ) {
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
                 val painter = rememberImagePainter(
                     data = "https://i.ytimg.com/vi/aZihG8ysDss/maxresdefault.jpg"
                 )
@@ -131,60 +143,77 @@ fun ChallengeItem(
             }
         }
 
-        Column(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(columnHeight)
-                .padding(10.dp)
-                .background(Color.DarkGray),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
-        ) {
-            if (isInfoVisible) {
-                Text(
-                    text = challenge.info,
-                    color = Color.White,
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 12.sp
-                    ),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                        .padding(top = 10.dp, start = 10.dp, end = 10.dp)
-                        .weight(1f)
+                .padding(start = 10.dp, end = 10.dp) //put .padding() before .clip()
+                .clip(RoundedCornerShape(20f))
+                .border(
+                    width = 1.dp,
+                    color = Color.Transparent,
+                    shape = RoundedCornerShape(20f)
                 )
-            }
-            Row(
+        ) {
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .background(Color.DarkGray),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
             ) {
-                Text(
-                    text = "Challenge for ${challenge.duration} days.",
-                    color = Color.White,
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 12.sp
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = "Fighting $daysLeft more days.",
-                    color = Color.White,
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 12.sp
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                if (isInfoVisible) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Text(
+                            text = challenge.info,
+                            color = Color.White,
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.SansSerif,
+                                fontSize = 12.sp
+                            ),
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier
+                                .weight(1f)
+                        )
+                    }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Challenge for ${challenge.duration} days.",
+                        color = Color.White,
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.SansSerif,
+                            fontSize = 12.sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = "Fighting $daysLeft more days.",
+                        color = Color.White,
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.SansSerif,
+                            fontSize = 12.sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
+
     }
 }
