@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
+import com.example.mychallenge.presentation.destinations.ChallengeTypeScreenDestination
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -36,7 +37,7 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = {
                     navigator.navigate(
-                        NameScreenDestination()
+                        ChallengeTypeScreenDestination()
                     )
                 }
             ) {

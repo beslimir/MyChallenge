@@ -3,6 +3,7 @@ package com.example.mychallenge.domain.model
 import java.time.LocalDate
 
 data class Challenge(
+    val type: String,
     val name: String,
     val duration: Int,
     val info: String,

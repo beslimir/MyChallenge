@@ -8,12 +8,14 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
 import com.example.mychallenge.presentation.NavGraphs
+import com.example.mychallenge.presentation.destinations.ChallengeTypeScreenDestination
 import com.example.mychallenge.presentation.destinations.DurationScreenDestination
 import com.example.mychallenge.presentation.destinations.InfoScreenDestination
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
 import com.example.mychallenge.presentation.new_challenge.duration.DurationScreen
 import com.example.mychallenge.presentation.new_challenge.info.InfoScreen
 import com.example.mychallenge.presentation.new_challenge.name.NameScreen
+import com.example.mychallenge.presentation.new_challenge.type.ChallengeTypeScreen
 import com.example.mychallenge.ui.theme.MyChallengeTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
@@ -32,21 +34,30 @@ class MainActivity : ComponentActivity() {
                     scaffoldState = scaffoldState
                 ) {
                     DestinationsNavHost(navGraph = NavGraphs.root) {
+                        composable(ChallengeTypeScreenDestination) {
+                            ChallengeTypeScreen(
+                                navigator = destinationsNavigator,
+                                scaffoldState = scaffoldState
+                            )
+                        }
                         composable(NameScreenDestination) {
                             NameScreen(
                                 navigator = destinationsNavigator,
-                                scaffoldState = scaffoldState
+                                scaffoldState = scaffoldState,
+                                challengeType = navArgs.challengeType
                             )
                         }
                         composable(DurationScreenDestination) {
                             DurationScreen(
                                 navigator = destinationsNavigator,
                                 scaffoldState = scaffoldState,
+                                challengeType = navArgs.challengeType,
                                 challengeName = navArgs.challengeName
                             )
                         }
                         composable(InfoScreenDestination) {
                             InfoScreen(
+                                challengeType = navArgs.challengeType,
                                 challengeName = navArgs.challengeName,
                                 challengeDuration = navArgs.challengeDuration,
                                 navigator = destinationsNavigator,

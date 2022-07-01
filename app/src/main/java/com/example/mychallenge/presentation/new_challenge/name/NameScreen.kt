@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mychallenge.domain.model.ChallengeType
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.DurationScreenDestination
 import com.example.mychallenge.presentation.new_challenge.components.ChallengeInputField
@@ -22,9 +23,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 @Destination
 fun NameScreen(
+    challengeType: String,
     navigator: DestinationsNavigator,
     scaffoldState: ScaffoldState,
-    viewModel: NameViewModel = hiltViewModel(),
+    viewModel: NameViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
 
@@ -33,6 +35,7 @@ fun NameScreen(
             when (event) {
                 is UiEvent.Success -> navigator.navigate(
                     DurationScreenDestination(
+                        challengeType = challengeType,
                         challengeName = viewModel.name
                     )
                 )

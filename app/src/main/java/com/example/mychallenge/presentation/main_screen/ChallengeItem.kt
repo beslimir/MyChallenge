@@ -73,6 +73,7 @@ fun ChallengeItem(
             ) {
                 val painter = rememberImagePainter(
                     data = "https://i.ytimg.com/vi/aZihG8ysDss/maxresdefault.jpg"
+//                    data = "https://images.theconversation.com/files/303322/original/file-20191124-74557-16zkcnl.jpg?ixlib=rb-1.1.0&rect=60%2C874%2C5643%2C2821&q=45&auto=format&w=1356&h=668&fit=crop"
                 )
                 val painterState = painter.state
                 var sizeImage by remember { mutableStateOf(IntSize.Zero) }

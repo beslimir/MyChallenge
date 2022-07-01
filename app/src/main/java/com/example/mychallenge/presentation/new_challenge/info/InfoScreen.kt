@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
 import com.example.mychallenge.domain.model.Challenge
+import com.example.mychallenge.domain.model.ChallengeType
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.HomeScreenDestination
 import com.example.mychallenge.presentation.new_challenge.components.ChallengeInputField
@@ -30,6 +31,7 @@ import java.time.LocalDate
 @Composable
 @Destination
 fun InfoScreen(
+    challengeType: String,
     challengeName: String,
     challengeDuration: Int,
     navigator: DestinationsNavigator,
@@ -44,6 +46,7 @@ fun InfoScreen(
                 is UiEvent.Success -> {
                     viewModel.saveChallengeToDb(
                         Challenge(
+                            type = challengeType,
                             name = challengeName,
                             duration = challengeDuration,
                             info = viewModel.info,

@@ -12,6 +12,7 @@ class InsertNewChallengeUseCase(
     suspend operator fun invoke(challenge: Challenge) {
         repository.insertNewChallenge(
             Challenge(
+                type = challenge.type,
                 name = challenge.name,
                 duration = challenge.duration,
                 info = challenge.info,

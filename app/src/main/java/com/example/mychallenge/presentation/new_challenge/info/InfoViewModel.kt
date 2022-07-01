@@ -50,6 +50,7 @@ class InfoViewModel @Inject constructor(
             try {
                 useCases.insertNewChallengeUseCase(
                     Challenge(
+                        type = challenge.type,
                         name = challenge.name,
                         duration = challenge.duration,
                         info = challenge.info,
