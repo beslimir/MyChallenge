@@ -17,8 +17,15 @@ class ChallengeTypeViewModel @Inject constructor(): ViewModel() {
 
     var type by mutableStateOf("")
         private set
+    var state by mutableStateOf(ChallengeState())
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
+
+    fun changePopup() {
+        state = state.copy(
+            isPopupVisible = !state.isPopupVisible
+        )
+    }
 
     fun onNextClick() {
         viewModelScope.launch {

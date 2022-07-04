@@ -19,5 +19,14 @@ sealed class ChallengeType(val name: String) {
                 else -> Other
             }
         }
+
+        val challengeTypeList = listOf(
+            Sports,
+            Religion,
+            Society,
+            SelfGrowth,
+            Addiction,
+            Other
+        )
     }
 }
