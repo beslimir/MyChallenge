@@ -1,6 +1,7 @@
 package com.example.mychallenge.presentation.new_challenge.type
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -81,9 +82,13 @@ fun ChallengeTypeScreen(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = {
-                    viewModel.changePopup()
-                }) {
+                IconButton(
+                    onClick = {
+                        viewModel.changePopup()
+                    },
+                    modifier = Modifier
+                        .then(Modifier.size(32.dp))
+                ) {
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
                         contentDescription = "challenge_type",
@@ -101,6 +106,7 @@ fun ChallengeTypeScreen(
                     }
                 )
             }
+            Spacer(modifier = Modifier.height(32.dp))
             AnimatedVisibility(
                 visible = state.isPopupVisible,
                 enter = fadeIn() + slideInHorizontally(),
