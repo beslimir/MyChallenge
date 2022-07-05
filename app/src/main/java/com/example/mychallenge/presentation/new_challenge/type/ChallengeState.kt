@@ -4,5 +4,6 @@ import com.example.mychallenge.domain.model.ChallengeType
 
 data class ChallengeState(
     val isPopupVisible: Boolean = false,
-    val challengeTypeSelected: ChallengeType = ChallengeType.Other
+    val isTextShownAsHint: Boolean = true,
+    val challengeTypeSelected: ChallengeType? = null
 )

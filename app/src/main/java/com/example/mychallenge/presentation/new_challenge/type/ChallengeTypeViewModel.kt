@@ -28,14 +28,20 @@ class ChallengeTypeViewModel @Inject constructor() : ViewModel() {
 
     fun onChallengeTypeSelected(challengeType: ChallengeType) {
         state = state.copy(
-            challengeTypeSelected = challengeType
+            challengeTypeSelected = challengeType,
+            isTextShownAsHint = false
         )
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            val isTypeDefined = state.challengeTypeSelected.name.isEmpty()
-            if (isTypeDefined) {
+            val isTypeDefined = state.challengeTypeSelected?.let {
+                it.name.let {
+                    true
+                }
+            } ?: false
+
+            if (!isTypeDefined) {
                 _uiEvent.send(
                     UiEvent.ShowSnackBar("Please, choose a type for your challenge!")
                 )

@@ -5,11 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,8 +36,9 @@ fun ChallengeTypeScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Success -> navigator.navigate(
+                    //Null won't happen because of Next button functionality
                     NameScreenDestination(
-                        challengeType = state.challengeTypeSelected.name
+                        challengeType = state.challengeTypeSelected?.name ?: "Sports"
                     )
                 )
                 is UiEvent.ShowSnackBar -> {
@@ -83,15 +85,20 @@ fun ChallengeTypeScreen(
                     viewModel.changePopup()
                 }) {
                     Icon(
-                        imageVector = Icons.Default.Check,
+                        imageVector = Icons.Default.ArrowDropDown,
                         contentDescription = "challenge_type",
                         modifier = Modifier
                             .size(30.dp)
                     )
                 }
                 Text(
-                    text = "Sports",
-                    fontSize = 20.sp
+                    text = state.challengeTypeSelected?.name ?: "Click on icon to choose...",
+                    fontSize = 20.sp,
+                    color = if (state.isTextShownAsHint) {
+                        Color.LightGray
+                    } else {
+                        Color.Black
+                    }
                 )
             }
             AnimatedVisibility(
@@ -130,7 +137,7 @@ fun ChallengeTypeScreen(
 
 @Composable
 fun OrderSection(
-    challengeType: ChallengeType,
+    challengeType: ChallengeType?,
     onChallengeTypeChange: (ChallengeType) -> Unit,
 ) {
     Column {
@@ -149,7 +156,7 @@ fun OrderSection(
 @Composable
 fun DefaultRadioButton(
     position: Int,
-    challengeType: ChallengeType,
+    challengeType: ChallengeType?,
     onSelect: (ChallengeType) -> Unit,
 ) {
     Row(
