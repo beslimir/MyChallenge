@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mychallenge.domain.model.ChallengeType
 import com.example.mychallenge.domain.model.ChallengeType.Companion.challengeTypeList
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
@@ -35,7 +36,7 @@ fun ChallengeTypeScreen(
             when (event) {
                 is UiEvent.Success -> navigator.navigate(
                     NameScreenDestination(
-                        challengeType = "sports"
+                        challengeType = state.challengeTypeSelected.name
                     )
                 )
                 is UiEvent.ShowSnackBar -> {
@@ -98,7 +99,12 @@ fun ChallengeTypeScreen(
                 enter = fadeIn() + slideInHorizontally(),
                 exit = fadeOut() + slideOutHorizontally()
             ) {
-                OrderSection()
+                OrderSection(
+                    challengeType = state.challengeTypeSelected,
+                    onChallengeTypeChange = {
+                        viewModel.onChallengeTypeSelected(it)
+                    }
+                )
             }
             Row(
                 modifier = Modifier
@@ -123,12 +129,18 @@ fun ChallengeTypeScreen(
 }
 
 @Composable
-fun OrderSection() {
+fun OrderSection(
+    challengeType: ChallengeType,
+    onChallengeTypeChange: (ChallengeType) -> Unit,
+) {
     Column {
         for (i in challengeTypeList.indices step 2) {
             DefaultRadioButton(
-                selected = i == 0,
-                position = i
+                position = i,
+                challengeType = challengeType,
+                onSelect = {
+                    onChallengeTypeChange(it)
+                }
             )
         }
     }
@@ -136,8 +148,9 @@ fun OrderSection() {
 
 @Composable
 fun DefaultRadioButton(
-    selected: Boolean,
     position: Int,
+    challengeType: ChallengeType,
+    onSelect: (ChallengeType) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -149,8 +162,10 @@ fun DefaultRadioButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = selected,
-                onClick = { },
+                selected = challengeTypeList[position] == challengeType,
+                onClick = {
+                    onSelect(challengeTypeList[position])
+                },
                 colors = RadioButtonDefaults.colors(
                     selectedColor = MaterialTheme.colors.primary,
                     unselectedColor = MaterialTheme.colors.onBackground
@@ -163,14 +178,21 @@ fun DefaultRadioButton(
             )
         }
 
-        if ((position + 1) % 2 == 1 && position + 1 < challengeTypeList.size) {
+        var pos = position
+        if (position + 1 < challengeTypeList.size) {
+            pos += 1
+        }
+
+        if (pos % 2 == 1) {
             Row(
                 modifier = Modifier.weight(1f),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = selected,
-                    onClick = { },
+                    selected = challengeTypeList[pos] == challengeType,
+                    onClick = {
+                        onSelect(challengeTypeList[pos])
+                    },
                     colors = RadioButtonDefaults.colors(
                         selectedColor = MaterialTheme.colors.primary,
                         unselectedColor = MaterialTheme.colors.onBackground
@@ -178,7 +200,7 @@ fun DefaultRadioButton(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = challengeTypeList[position + 1].name,
+                    text = challengeTypeList[pos].name,
                     style = MaterialTheme.typography.body1
                 )
             }
