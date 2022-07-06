@@ -1,7 +1,6 @@
 package com.example.mychallenge.presentation.new_challenge.type
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -39,7 +38,9 @@ fun ChallengeTypeScreen(
                 is UiEvent.Success -> navigator.navigate(
                     //Null won't happen because of Next button functionality
                     NameScreenDestination(
-                        challengeType = state.challengeTypeSelected?.name ?: "Sports"
+                        //TODO: Why are these 2 rows different?
+//                        challengeType = state.challengeTypeSelected?.name ?: "Sports"
+                        challengeType = viewModel.state.challengeTypeSelected?.name ?: "Sports"
                     )
                 )
                 is UiEvent.ShowSnackBar -> {

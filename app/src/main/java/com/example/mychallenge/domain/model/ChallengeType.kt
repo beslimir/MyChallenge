@@ -10,7 +10,7 @@ sealed class ChallengeType(val name: String, val url: String) {
 
     companion object {
         fun fromString(name: String): ChallengeType {
-            return when(name.lowercase()) {
+            return when(name) {
                 "Sports" -> Sports
                 "Religion" -> Religion
                 "Society" -> Society
