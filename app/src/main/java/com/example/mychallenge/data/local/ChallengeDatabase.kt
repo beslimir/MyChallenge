@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [ChallengeEntity::class],
-    version = 5
+    version = 1
 )
 abstract class ChallengeDatabase: RoomDatabase() {
 

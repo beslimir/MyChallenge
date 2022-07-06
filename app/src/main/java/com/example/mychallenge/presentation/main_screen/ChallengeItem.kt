@@ -71,10 +71,7 @@ fun ChallengeItem(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                val painter = rememberImagePainter(
-                    data = "https://i.ytimg.com/vi/aZihG8ysDss/maxresdefault.jpg"
-//                    data = "https://images.theconversation.com/files/303322/original/file-20191124-74557-16zkcnl.jpg?ixlib=rb-1.1.0&rect=60%2C874%2C5643%2C2821&q=45&auto=format&w=1356&h=668&fit=crop"
-                )
+                val painter = rememberImagePainter(data = challenge.type.url)
                 val painterState = painter.state
                 var sizeImage by remember { mutableStateOf(IntSize.Zero) }
                 val gradient = Brush.verticalGradient(
@@ -131,6 +128,10 @@ fun ChallengeItem(
                                 tint = Color.White
                             )
                         }
+                    } else if (painterState is ImagePainter.State.Empty) {
+                        //TODO: Empty state
+                    } else {
+                        //TODO: Error state
                     }
                 }
             }

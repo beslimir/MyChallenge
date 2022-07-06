@@ -9,7 +9,7 @@ import java.time.LocalDate
 @SuppressLint("NewApi")
 fun ChallengeEntity.toChallenge(): Challenge {
     return Challenge(
-        type = type,
+        type = ChallengeType.fromString(type),
         name = name,
         duration = duration,
         info = info,
@@ -21,7 +21,7 @@ fun ChallengeEntity.toChallenge(): Challenge {
 @SuppressLint("NewApi")
 fun Challenge.toChallengeEntity(): ChallengeEntity {
     return ChallengeEntity(
-        type = type,
+        type = ChallengeType.toNameString(type),
         name = name,
         duration = duration,
         info = info,

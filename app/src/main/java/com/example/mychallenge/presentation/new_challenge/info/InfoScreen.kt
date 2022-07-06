@@ -46,7 +46,7 @@ fun InfoScreen(
                 is UiEvent.Success -> {
                     viewModel.saveChallengeToDb(
                         Challenge(
-                            type = challengeType,
+                            type = ChallengeType.fromString(challengeType),
                             name = challengeName,
                             duration = challengeDuration,
                             info = viewModel.info,
