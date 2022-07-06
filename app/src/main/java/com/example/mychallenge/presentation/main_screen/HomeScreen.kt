@@ -81,7 +81,7 @@ fun HomeScreen(
                             onClick = {
                                 navigator.navigate(
                                     ChallengeDetailsScreenDestination(
-                                        item.toChallengeEntity()
+                                        item.toChallengeEntity() //TODO: Check how to add this as model (no entity)
                                     )
                                 )
                             }
