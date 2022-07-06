@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
+import com.example.mychallenge.data.mapper.toChallengeEntity
+import com.example.mychallenge.presentation.destinations.ChallengeDetailsScreenDestination
 import com.example.mychallenge.presentation.destinations.ChallengeTypeScreenDestination
 import com.example.mychallenge.presentation.destinations.NameScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -75,6 +77,13 @@ fun HomeScreen(
                                         viewModel.restoreChallenge()
                                     }
                                 }
+                            },
+                            onClick = {
+                                navigator.navigate(
+                                    ChallengeDetailsScreenDestination(
+                                        item.toChallengeEntity()
+                                    )
+                                )
                             }
                         )
                     }

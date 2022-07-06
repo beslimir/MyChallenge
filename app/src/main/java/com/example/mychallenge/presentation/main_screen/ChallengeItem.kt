@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -41,6 +42,7 @@ import java.time.temporal.ChronoUnit
 fun ChallengeItem(
     challenge: Challenge,
     onRemoveClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     val endDate = challenge.date.plusDays(challenge.duration.toLong())
     val daysLeft = if (endDate > LocalDate.now()) {
@@ -54,6 +56,7 @@ fun ChallengeItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.Gray)
+            .clickable(onClick = onClick)
     ) {
         Box(
             modifier = Modifier

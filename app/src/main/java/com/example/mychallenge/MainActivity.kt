@@ -7,11 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
+import coil.annotation.ExperimentalCoilApi
+import com.example.mychallenge.data.mapper.toChallenge
 import com.example.mychallenge.presentation.NavGraphs
-import com.example.mychallenge.presentation.destinations.ChallengeTypeScreenDestination
-import com.example.mychallenge.presentation.destinations.DurationScreenDestination
-import com.example.mychallenge.presentation.destinations.InfoScreenDestination
-import com.example.mychallenge.presentation.destinations.NameScreenDestination
+import com.example.mychallenge.presentation.destinations.*
+import com.example.mychallenge.presentation.details_screen.ChallengeDetailsScreen
 import com.example.mychallenge.presentation.new_challenge.duration.DurationScreen
 import com.example.mychallenge.presentation.new_challenge.info.InfoScreen
 import com.example.mychallenge.presentation.new_challenge.name.NameScreen
@@ -21,6 +21,7 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalCoilApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +63,11 @@ class MainActivity : ComponentActivity() {
                                 challengeDuration = navArgs.challengeDuration,
                                 navigator = destinationsNavigator,
                                 scaffoldState = scaffoldState
+                            )
+                        }
+                        composable(ChallengeDetailsScreenDestination) {
+                            ChallengeDetailsScreen(
+                                challenge = navArgs
                             )
                         }
                     }
