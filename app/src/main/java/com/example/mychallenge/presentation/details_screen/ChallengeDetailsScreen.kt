@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,6 +21,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -40,10 +42,15 @@ fun ChallengeDetailsScreen(
 ) {
     val state = viewModel.state
     val animatedPassedDays = animateIntAsState(targetValue = state.passedDays)
-
     val progressRatio = remember {
         Animatable(0f)
     }
+    val infoTextStyle = TextStyle(
+        color = Color.Gray,
+        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.SansSerif,
+        fontSize = 16.sp
+    )
 
     LaunchedEffect(key1 = true) {
         viewModel.changeStateValue(challenge.toChallenge())
@@ -60,6 +67,7 @@ fun ChallengeDetailsScreen(
             .fillMaxSize()
             .background(Color.LightGray)
     ) {
+        //Header Section
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -118,7 +126,7 @@ fun ChallengeDetailsScreen(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Text(
-                        text = challenge.info,
+                        text = challenge.type,
                         fontSize = 16.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -131,6 +139,7 @@ fun ChallengeDetailsScreen(
             }
         }
 
+        //ProgressBar Section
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -162,35 +171,134 @@ fun ChallengeDetailsScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = animatedPassedDays.value.toString()
-                    )
-                    Text(
-                        text = challenge.duration.toString()
-                    )
+                    Column {
+                        Text(
+                            text = "Current:",
+                            style = infoTextStyle,
+                            color = Color.White,
+                            fontSize = 12.sp
+                        )
+                        Text(
+                            text = "${animatedPassedDays.value} days",
+                            style = infoTextStyle,
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                    }
+                    Column {
+                        Text(
+                            text = "Total:",
+                            style = infoTextStyle,
+                            color = Color.White,
+                            fontSize = 12.sp
+                        )
+                        Text(
+                            text = "${challenge.duration} days",
+                            style = infoTextStyle,
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                    }
                 }
             }
         }
 
+        //Info Section
+        if (challenge.info.isNotEmpty()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = challenge.info,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(10.dp, bottom = 0.dp),
+                    style = infoTextStyle,
+                    color = Color.White
+                )
+            }
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .weight(1f),
+                color = Color.Gray
+            )
+            Canvas(modifier = Modifier) {
+                drawCircle(
+                    color = Color.Gray,
+                    radius = 8f
+                )
+            }
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .weight(1f),
+                color = Color.Gray
+            )
+        }
+
+
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
+            verticalAlignment = Alignment.Top
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .weight(1f)
-                    .background(Color.Red)
+                    .weight(1f),
+                horizontalAlignment = Alignment.End
             ) {
-
+                Text(
+                    text = "Start:",
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "End:",
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "Duration:",
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "Try:",
+                    style = infoTextStyle
+                )
             }
+            Spacer(modifier = Modifier.width(10.dp))
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .weight(1f)
-                    .background(Color.Blue)
+                    .weight(1f),
+                horizontalAlignment = Alignment.Start
             ) {
+                val endDate = challenge.toChallenge().date.plusDays(challenge.duration.toLong())
 
+                Text(
+                    text = challenge.toChallenge().date.toString(),
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "$endDate",
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "${challenge.duration} days",
+                    style = infoTextStyle
+                )
+                Text(
+                    text = "1",
+                    style = infoTextStyle
+                )
             }
 
         }
