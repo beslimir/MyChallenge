@@ -20,7 +20,7 @@ import com.example.mychallenge.domain.model.Challenge
 import com.example.mychallenge.domain.model.ChallengeType
 import com.example.mychallenge.presentation.LocalSpacing
 import com.example.mychallenge.presentation.destinations.HomeScreenDestination
-import com.example.mychallenge.presentation.new_challenge.components.ChallengeInputField
+import com.example.mychallenge.presentation.components.ChallengeInputField
 import com.example.mychallenge.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

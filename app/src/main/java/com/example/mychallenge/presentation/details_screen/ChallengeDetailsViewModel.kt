@@ -33,9 +33,13 @@ class ChallengeDetailsViewModel @Inject constructor(
         return ChronoUnit.DAYS.between(challenge.date, LocalDate.now()).toInt()
     }
 
-    private fun getNumOfRemainingDays(challenge: Challenge): Int {
-        val endDate = challenge.date.plusDays(challenge.duration.toLong())
+    fun getNumOfRemainingDays(challenge: Challenge): Int {
+        val endDate = getEndDate(challenge)
         return ChronoUnit.DAYS.between(LocalDate.now(), endDate).toInt()
+    }
+
+    fun getEndDate(challenge: Challenge): LocalDate {
+        return challenge.date.plusDays(challenge.duration.toLong())
     }
 
 

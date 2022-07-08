@@ -1,4 +1,4 @@
-package com.example.mychallenge.presentation.new_challenge.components
+package com.example.mychallenge.presentation.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

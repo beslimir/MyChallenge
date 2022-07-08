@@ -32,6 +32,8 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.mychallenge.domain.model.Challenge
+import com.example.mychallenge.ui.theme.HeaderColor
+import com.example.mychallenge.ui.theme.BackgroundColor
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -55,7 +57,7 @@ fun ChallengeItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Gray)
+            .background(BackgroundColor)
             .clickable(onClick = onClick)
     ) {
         Box(
@@ -153,7 +155,7 @@ fun ChallengeItem(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.DarkGray),
+                    .background(HeaderColor),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
