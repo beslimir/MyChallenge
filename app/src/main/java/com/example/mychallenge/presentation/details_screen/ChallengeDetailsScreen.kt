@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.mychallenge.data.local.ChallengeEntity
 import com.example.mychallenge.data.mapper.toChallenge
+import com.example.mychallenge.presentation.components.CustomButton
 import com.example.mychallenge.presentation.components.InfoScreenSection
 import com.example.mychallenge.presentation.components.VerticalDivider
 import com.example.mychallenge.ui.theme.*
@@ -218,13 +219,6 @@ fun ChallengeDetailsScreen(
             }
         }
 
-        //Current Status
-//        Row() {
-//            Text(
-//                text = ""
-//            )
-//        }
-
         //Info Section
         if (challenge.info.isNotEmpty()) {
             Row(
@@ -302,100 +296,24 @@ fun ChallengeDetailsScreen(
             imageContent = "End"
         )
 
-
-//        Row(
-//            modifier = Modifier
-//                .fillMaxSize(),
-//            verticalAlignment = Alignment.Top
-//        ) {
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxHeight()
-//                    .weight(1f)
-//                    .padding(start = 10.dp, end = 10.dp),
-//                horizontalAlignment = Alignment.End
-//            ) {
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Filled.Check,
-//                        contentDescription = "Start",
-//                        tint = IconColor2
-//                    )
-//                    Text(
-//                        text = "Start:",
-//                        style = infoTextStyle
-//                    )
-//                }
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Filled.Star,
-//                        contentDescription = "End",
-//                        tint = IconColor2
-//                    )
-//                    Text(
-//                        text = "End:",
-//                        style = infoTextStyle
-//                    )
-//                }
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Filled.Notifications,
-//                        contentDescription = "Duration",
-//                        tint = IconColor2
-//                    )
-//                    Text(
-//                        text = "Duration:",
-//                        style = infoTextStyle
-//                    )
-//                }
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Filled.Face,
-//                        contentDescription = "Try",
-//                        tint = IconColor2
-//                    )
-//                    Text(
-//                        text = "Try:",
-//                        style = infoTextStyle
-//                    )
-//                }
-//            }
-//            Spacer(modifier = Modifier.width(10.dp))
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxHeight()
-//                    .weight(1f),
-//                horizontalAlignment = Alignment.Start
-//            ) {
-//                val endDate = challenge.toChallenge().date.plusDays(challenge.duration.toLong())
-//
-//                Text(
-//                    text = challenge.toChallenge().date.toString(),
-//                    style = infoTextStyle
-//                )
-//                Text(
-//                    text = "$endDate",
-//                    style = infoTextStyle
-//                )
-//                Text(
-//                    text = "${challenge.duration} days",
-//                    style = infoTextStyle
-//                )
-//                Text(
-//                    text = "1",
-//                    style = infoTextStyle
-//                )
-//            }
-//
-//        }
+        //TODO: Finish implementation
+        //Bottom Line
+        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            CustomButton(
+                text = "Give up!",
+                buttonColor = ButtonColorFailed
+            )
+            CustomButton(
+                text = "In progress...",
+                buttonColor = ButtonColorSucceeded
+            )
+        }
 
 
     }

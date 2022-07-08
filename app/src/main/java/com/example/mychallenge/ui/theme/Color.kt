@@ -13,6 +13,8 @@ val ChallengeItemColor = Color(0xFFF77148)
 val BackgroundColor = Color(0xFFF0F3FA)
 val ProgressBarColor = Color(0xFF05F50D)
 val DividerColor = Color(0xFF05F50D)
+val ButtonColorFailed = Color(0xFFF77148)
+val ButtonColorSucceeded = Color(0xFF05F50D)
 
 //text color
 val InfoTextColor = Color(0xFFF77148)
