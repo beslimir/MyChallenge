@@ -16,9 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -296,9 +294,23 @@ fun ChallengeDetailsScreen(
             imageContent = "End"
         )
 
-        //TODO: Finish implementation
+        //TODO: Move to viewModel (State) and finish implementation
         //Bottom Line
         Spacer(modifier = Modifier.weight(1f))
+
+        var textColor1 by remember {
+            mutableStateOf(ButtonColorFailed)
+        }
+        var textColor2 by remember {
+            mutableStateOf(ButtonColorSucceeded)
+        }
+        var backgroundColor1 by remember {
+            mutableStateOf(BackgroundColor)
+        }
+        var backgroundColor2 by remember {
+            mutableStateOf(BackgroundColor)
+        }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -307,11 +319,33 @@ fun ChallengeDetailsScreen(
         ) {
             CustomButton(
                 text = "Give up!",
-                buttonColor = ButtonColorFailed
+                borderColor = ButtonColorFailed,
+                textColor = textColor1,
+                backgroundColor = backgroundColor1,
+                onClick = {
+                    if (backgroundColor1 == BackgroundColor) {
+                        backgroundColor1 = ButtonColorFailed
+                        textColor1 = BackgroundColor
+                    } else {
+                        backgroundColor1 = BackgroundColor
+                        textColor1 = ButtonColorFailed
+                    }
+                }
             )
             CustomButton(
                 text = "In progress...",
-                buttonColor = ButtonColorSucceeded
+                borderColor = ButtonColorSucceeded,
+                textColor = textColor2,
+                backgroundColor = backgroundColor2,
+                onClick = {
+                    if (backgroundColor2 == BackgroundColor) {
+                        backgroundColor2 = ButtonColorSucceeded
+                        textColor2 = BackgroundColor
+                    } else {
+                        backgroundColor2 = BackgroundColor
+                        textColor2 = ButtonColorSucceeded
+                    }
+                }
             )
         }
 

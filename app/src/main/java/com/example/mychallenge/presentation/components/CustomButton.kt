@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,49 +17,32 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.mychallenge.ui.theme.BackgroundColor
 
 @Composable
 fun CustomButton(
     text: String,
-    buttonColor: Color,
+    borderColor: Color,
+    textColor: Color,
+    backgroundColor: Color,
+    onClick: () -> Unit,
 ) {
-
-    var bColor by remember {
-        mutableStateOf(buttonColor)
-    }
-    var bgrdColor by remember {
-        mutableStateOf(BackgroundColor)
-    }
-
     Box(
         modifier = Modifier
             .height(40.dp)
             .width(120.dp)
-            .clickable {
-                bColor = if (bColor == BackgroundColor) {
-                    buttonColor
-                } else {
-                    BackgroundColor
-                }
-                bgrdColor = if (bgrdColor == BackgroundColor) {
-                    buttonColor
-                } else {
-                    BackgroundColor
-                }
-            }
+            .clickable { onClick() }
             .clip(RoundedCornerShape(20f))
             .border(
                 width = 2.dp,
-                color = bColor,
+                color = borderColor,
                 shape = RoundedCornerShape(20f)
             )
-            .background(bgrdColor),
+            .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = bColor,
+            color = textColor,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
