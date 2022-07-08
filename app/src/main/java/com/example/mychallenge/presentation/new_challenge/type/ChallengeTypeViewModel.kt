@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChallengeTypeViewModel @Inject constructor() : ViewModel() {
 
-    var state by mutableStateOf(ChallengeState())
+    var state by mutableStateOf(ChallengeTypeState())
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 

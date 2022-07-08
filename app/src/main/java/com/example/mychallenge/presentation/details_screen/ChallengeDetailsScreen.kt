@@ -218,6 +218,13 @@ fun ChallengeDetailsScreen(
             }
         }
 
+        //Current Status
+//        Row() {
+//            Text(
+//                text = ""
+//            )
+//        }
+
         //Info Section
         if (challenge.info.isNotEmpty()) {
             Row(

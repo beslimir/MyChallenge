@@ -47,6 +47,7 @@ fun InfoScreenSection(
             Text(
                 text = bottomLeftText,
                 color = LightGrayTextColor,
+                fontWeight = FontWeight.Bold,
                 fontSize = 12.sp
             )
         }

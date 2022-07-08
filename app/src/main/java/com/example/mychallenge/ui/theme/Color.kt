@@ -18,7 +18,7 @@ val DividerColor = Color(0xFF05F50D)
 val InfoTextColor = Color(0xFFF77148)
 val HeaderTextColor = Color(0xFFFFFFFF)
 val ProgressBarTextColor = Color(0xFF05F50D)
-val LightGrayTextColor = Color(0xFFCBCDD1)
+val LightGrayTextColor = Color(0xFFA4A7AB)
 val BlackTextColor = Color(0xFF000000)
 
 val IconColor1 = Color(0xFF4B86F2)
